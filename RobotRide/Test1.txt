@@ -1,0 +1,22 @@
+*** Settings ***
+Library           SeleniumLibrary
+
+*** Variables ***
+${url}            http://opensource.demo.orangehrmlive.com/index.php/auth/login
+@{Credential}     Admin    admin    # Credentials for demo website
+&{Login}          Username=Admin    Password=admin
+
+*** Test Cases ***
+Test1
+    Open Browser    https://www.google.com    chrome
+    Close Browser
+    Log To Console    Complete successfully
+
+Test2
+    [Tags]    Test2
+    Open Browser    ${url}    chrome
+    Input Text    id=txtUsername    &{Login}[Username]
+    Input Text    id=txtPassword    &{Login}[Password]
+    clickButton    id=btnLogin
+    Close Browser
+    Log To Console    %{username} run this test on %{os}
