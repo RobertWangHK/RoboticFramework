@@ -1,4 +1,6 @@
 *** Settings ***
+Suite Setup       HomePage
+Suite Teardown    Close All Browsers
 Library           SeleniumLibrary
 
 *** Variables ***
@@ -20,3 +22,19 @@ Test2
     clickButton    id=btnLogin
     Close Browser
     Log To Console    %{username} run this test on %{os}
+
+Test3
+    [Tags]    Test3
+    Open Browser    ${url}    chrome
+    Login
+    Close Browser
+    Set Tags    newTags
+
+*** Keywords ***
+Login
+    Input Text    id=txtUsername    Admin
+    Input Text    id=txtPassword    admin
+    Click Button    id=btnLogin
+
+HomePage
+    Open Browser    https://www.google.com    chrome
